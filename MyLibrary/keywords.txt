@@ -1,0 +1,4 @@
+MyLibrary	KEYWORD1
+begin	KEYWORD2
+doWork	KEYWORD2
+end	KEYWORD2
