@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2024-09-25T17:47:55-07:00
+
+====== my IT Cookbook ======
+Created Wednesday 25 September 2024
+
+
