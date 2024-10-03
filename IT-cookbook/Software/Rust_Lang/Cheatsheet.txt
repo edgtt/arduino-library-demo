@@ -1,0 +1,93 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2024-10-03T13:31:46-07:00
+
+==== **Rust Cheatsheet** ====
+
+=== 1. **Basic Syntax** ===
+''fn main() {''
+''    println!("Hello, world!");''
+''}''
+
+=== 2. **Variables** ===
+''let x = 5; // Immutable by default''
+''let mut y = 10; // Mutable''
+
+=== 3. **Data Types** ===
+''let x: i32 = 5;''
+''let y: f64 = 2.0;''
+''let z: char = 'z';''
+''let is_true: bool = true;''
+
+=== 4. **Functions** ===
+''fn add(x: i32, y: i32) -> i32 {''
+''    x + y''
+''}''
+
+=== 5. **Control Flow** ===
+''if x < 5 {''
+''    println!("x is less than 5");''
+''} else {''
+''    println!("x is 5 or more");''
+''}''
+
+''for i in 0..5 {''
+''    println!("i is {}", i);''
+''}''
+
+''while y < 10 {''
+''    y += 1;''
+''}''
+
+=== 6. **Ownership and Borrowing** ===
+''fn ownership_example() {''
+''    let s1 = String::from("hello");''
+''    let s2 = s1; // s1 is now invalid''
+''}''
+
+''fn borrowing_example(s: &String) -> usize {''
+''    s.len() // Borrowing without taking ownership''
+''}''
+
+=== 7. **Structs** ===
+''struct User {''
+''    username: String,''
+''    active: bool,''
+''}''
+
+''let user1 = User {''
+''    username: String::from("alice"),''
+''    active: true,''
+''};''
+
+=== 8. **Enums** ===
+''enum Direction {''
+''    Up,''
+''    Down,''
+''    Left,''
+''    Right,''
+''}''
+
+''let dir = Direction::Up;''
+
+=== 9. **Pattern Matching** ===
+''match dir {''
+''    Direction::Up => println!("Going up!"),''
+''    Direction::Down => println!("Going down!"),''
+''    _ => println!("Moving sideways."),''
+''}''
+
+=== 10. **Error Handling** ===
+''fn divide(x: i32, y: i32) -> Result<i32, String> {''
+''    if y == 0 {''
+''        Err(String::from("Cannot divide by zero"))''
+''    } else {''
+''        Ok(x / y)''
+''    }''
+''}''
+
+''match divide(10, 2) {''
+''    Ok(result) => println!("Result: {}", result),''
+''    Err(e) => println!("Error: {}", e),''
+''}''
+

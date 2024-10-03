@@ -1,0 +1,11 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2024-10-02T18:26:39-07:00
+
+====== Rust Lang ======
+Created Wednesday 02 October 2024
+
+	* [[+PROs and CONs|PROs and CONs]]
+	* [[+Cheatsheet|Cheatsheet]]
+	* [[+Cookbook|Cookbook]]
+

@@ -1,0 +1,70 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2024-10-03T13:32:00-07:00
+
+==== **Rust Cookbook** ====
+
+=== 1. **Reading a File** ===
+''use std::fs::File;''
+''use std::io::{self, Read};''
+
+''fn read_file(path: &str) -> io::Result<String> {''
+	''let mut file = File::open(path)?;''
+	''let mut content = String::new();''
+	''file.read_to_string(&mut content)?;''
+	''Ok(content)''
+''}''
+
+=== 2. **Writing to a File** ===
+''use std::fs::File;''
+''use std::io::Write;''
+
+''fn write_to_file(path: &str, content: &str) -> std::io::Result<()> {''
+	''let mut file = File::create(path)?;''
+	''file.write_all(content.as_bytes())?;''
+	''Ok(())''
+''}''
+
+=== 3. **HTTP Request using `reqwest`** ===
+''use reqwest;''
+
+''#[tokio::main]''
+''async fn main() -> Result<(), reqwest::Error> {''
+	''let response = reqwest::get("https://api.github.com/repos/rust-lang/rust")''
+		''.await?''
+		''.text()''
+		''.await?;''
+	''println!("{}", response);''
+	''Ok(())''
+''}''
+
+=== 4. **Simple TCP Server** ===
+''use std::net::{TcpListener, TcpStream};''
+''use std::io::{Read, Write};''
+
+''fn handle_client(mut stream: TcpStream) {''
+	''let mut buffer = [0; 512];''
+	''stream.read(&mut buffer).unwrap();''
+	''stream.write(&buffer).unwrap();''
+''}''
+
+''fn main() {''
+	''let listener = TcpListener::bind("127.0.0.1:7878").unwrap();''
+	''for stream in listener.incoming() {''
+		''let stream = stream.unwrap();''
+		''handle_client(stream);''
+	''}''
+''}''
+
+=== 5. **Concurrency with `std::thread`** ===
+''use std::thread;''
+
+''fn main() {''
+	''let handle = thread::spawn(|| {''
+		''for i in 1..10 {''
+			''println!("Thread count: {}", i);''
+		''}''
+	''});''
+
+	''handle.join().unwrap(); // Wait for the thread to finish''
+''}''
