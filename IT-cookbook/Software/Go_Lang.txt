@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2024-10-02T22:23:07-07:00
+
+====== Go Lang ======
+Created Wednesday 02 October 2024
+
+	* [[+Go_Cookbook|Cookbook]]

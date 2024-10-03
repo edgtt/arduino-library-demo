@@ -2,7 +2,14 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.6
 Creation-Date: 2024-09-25T17:47:55-07:00
 
-====== my IT Cookbook ======
+====== IT Cookbook ======
 Created Wednesday 25 September 2024
 
+[[../LICENSE|LICENSE]]
+[[../README.md|README.md]]
+
+* [[Software]]
+* Embedded
+* AI
+* Robotics
 

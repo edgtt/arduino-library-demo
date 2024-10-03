@@ -1,0 +1,332 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2024-10-03T13:21:29-07:00
+
+===== mini "Go Language Cookbook" with examples =====
+
+==== 1. **Basic Structure of a Go Program** ====
+
+''package main''
+
+''import "fmt"''
+
+''func main() {''
+	''fmt.Println("Hello, Go!")''
+''}''
+
+==== 2. **Reading and Writing Files** ====
+
+''package main''
+
+''import (''
+	''"fmt"''
+	''"io/ioutil"''
+	''"os"''
+'')''
+
+''func main() {''
+	''// Write to file''
+	''content := []byte("Hello, file!")''
+	''err := ioutil.WriteFile("example.txt", content, 0644)''
+	''if err != nil {''
+		''fmt.Println("Error:", err)''
+	''}''
+
+	''// Read from file''
+	''data, err := ioutil.ReadFile("example.txt")''
+	''if err != nil {''
+		''fmt.Println("Error:", err)''
+	''}''
+	''fmt.Println(string(data))''
+''}''
+
+==== 3. **Handling Errors** ====
+
+''package main''
+
+''import (''
+	''"errors"''
+	''"fmt"''
+'')''
+
+''func divide(a, b float64) (float64, error) {''
+	''if b == 0 {''
+		''return 0, errors.New("cannot divide by zero")''
+	''}''
+	''return a / b, nil''
+''}''
+
+''func main() {''
+	''result, err := divide(4, 0)''
+	''if err != nil {''
+		''fmt.Println("Error:", err)''
+	''} else {''
+		''fmt.Println("Result:", result)''
+	''}''
+''}''
+
+==== 4. **Goroutines and Channels (Concurrency)** ====
+
+''package main''
+
+''import (''
+	''"fmt"''
+	''"time"''
+'')''
+
+''func say(s string) {''
+	''for i := 0; i < 3; i++ {''
+		''fmt.Println(s)''
+		''time.Sleep(time.Millisecond * 100)''
+	''}''
+''}''
+
+''func main() {''
+	''go say("Goroutine 1")''
+	''go say("Goroutine 2")''
+
+	''time.Sleep(time.Second)''
+	''fmt.Println("Main finished")''
+''}''
+
+==== 5. **Working with Structs** ====
+
+''package main''
+
+''import "fmt"''
+
+''// Define a struct''
+''type Person struct {''
+	''Name string''
+	''Age  int''
+''}''
+
+''// Method for the Person struct''
+''func (p Person) Greet() {''
+	''fmt.Printf("Hello, my name is %s and I am %d years old.\n", p.Name, p.Age)''
+''}''
+
+''func main() {''
+	''p := Person{Name: "Alice", Age: 30}''
+	''p.Greet()''
+''}''
+
+==== 6. **HTTP Server** ====
+
+''package main''
+
+''import (''
+	''"fmt"''
+	''"net/http"''
+'')''
+
+''func handler(w http.ResponseWriter, r *http.Request) {''
+	''fmt.Fprintln(w, "Hello, Go Web!")''
+''}''
+
+''func main() {''
+	''http.HandleFunc("/", handler)''
+	''fmt.Println("Server starting at http://localhost:8080")''
+	''http.ListenAndServe(":8080", nil)''
+''}''
+
+==== 7. **JSON Marshalling and Unmarshalling** ====
+
+''package main''
+
+''import (''
+	''"encoding/json"''
+	''"fmt"''
+'')''
+
+''type User struct {''
+	''Name  string `json:"name"`''
+	''Email string `json:"email"`''
+''}''
+
+''func main() {''
+	''// Marshal to JSON''
+	''user := User{Name: "Bob", Email: "bob@example.com"}''
+	''jsonData, _ := json.Marshal(user)''
+	''fmt.Println(string(jsonData))''
+
+	''// Unmarshal from JSON''
+	''var newUser User''
+	''jsonString := `{"name":"Alice","email":"alice@example.com"}`''
+	''json.Unmarshal([]byte(jsonString), &newUser)''
+	''fmt.Printf("%+v\n", newUser)''
+''}''
+
+==== 8. **Handling CLI Arguments** ====
+
+''package main''
+
+''import (''
+	''"fmt"''
+	''"os"''
+'')''
+
+''func main() {''
+	''args := os.Args[1:] // Skip the program name''
+	''if len(args) > 0 {''
+		''fmt.Println("Arguments:", args)''
+	''} else {''
+		''fmt.Println("No arguments provided.")''
+	''}''
+''}''
+
+==== 9. **Unit Testing** ====
+
+''package main''
+
+''import "testing"''
+
+''func Add(a, b int) int {''
+	''return a + b''
+''}''
+
+''func TestAdd(t *testing.T) {''
+	''result := Add(2, 3)''
+	''expected := 5''
+	''if result != expected {''
+		''t.Errorf("expected %d but got %d", expected, result)''
+	''}''
+''}''
+
+==== 10. **Interfaces** ====
+
+''package main''
+
+''import "fmt"''
+
+''type Animal interface {''
+	''Speak() string''
+''}''
+
+''type Dog struct{}''
+
+''func (d Dog) Speak() string {''
+	''return "Woof!"''
+''}''
+
+''type Cat struct{}''
+
+''func (c Cat) Speak() string {''
+	''return "Meow!"''
+''}''
+
+''func main() {''
+	''var animal Animal''
+
+	''animal = Dog{}''
+	''fmt.Println(animal.Speak())''
+
+	''animal = Cat{}''
+	''fmt.Println(animal.Speak())''
+''}''
+
+==== 11. **Slices and Maps** ====
+
+- **Slices Example**:
+
+''package main''
+
+''import "fmt"''
+
+''func main() {''
+	''nums := []int{1, 2, 3, 4}''
+	''nums = append(nums, 5)''
+
+	''for i, num := range nums {''
+		''fmt.Printf("Index %d: %d\n", i, num)''
+	''}''
+''}''
+
+- **Maps Example**:
+
+''package main''
+
+''import "fmt"''
+
+''func main() {''
+	''capitals := map[string]string{''
+		''"France":   "Paris",''
+		''"Germany":  "Berlin",''
+		''"Italy":    "Rome",''
+	''}''
+
+	''for country, capital := range capitals {''
+		''fmt.Printf("The capital of %s is %s.\n", country, capital)''
+	''}''
+''}''
+
+==== 12. **Defer, Panic, and Recover** ====
+
+- **Defer**: Used to ensure that a function call is performed later in a program’s execution, usually for cleanup.
+
+''package main''
+
+''import "fmt"''
+
+''func main() {''
+	''defer fmt.Println("Deferred function call")''
+	''fmt.Println("Main function")''
+''}''
+
+- **Panic and Recover**: Used for error handling when the program encounters unexpected situations.
+
+''package main''
+
+''import "fmt"''
+
+''func mightPanic() {''
+	''defer func() {''
+		''if r := recover(); r != nil {''
+			''fmt.Println("Recovered from panic:", r)''
+		''}''
+	''}()''
+	''panic("Something went wrong!")''
+''}''
+
+''func main() {''
+	''mightPanic()''
+	''fmt.Println("Program continues after recovery.")''
+''}''
+
+==== 13. **Database Access (Using `database/sql` and PostgreSQL)** ====
+
+''package main''
+
+''import (''
+	''"database/sql"''
+	''"fmt"''
+	''_ "github.com/lib/pq"''
+'')''
+
+''func main() {''
+	''connStr := "user=username dbname=mydb sslmode=disable"''
+	''db, err := sql.Open("postgres", connStr)''
+	''if err != nil {''
+		''panic(err)''
+	''}''
+	''defer db.Close()''
+
+	''// Query''
+	''rows, err := db.Query("SELECT id, name FROM users")''
+	''if err != nil {''
+		''panic(err)''
+	''}''
+	''defer rows.Close()''
+
+	''for rows.Next() {''
+		''var id int''
+		''var name string''
+		''err = rows.Scan(&id, &name)''
+		''if err != nil {''
+			''panic(err)''
+		''}''
+		''fmt.Println(id, name)''
+	''}''
+''}''
+
+This cookbook covers essential Go idioms, patterns, and use cases.
